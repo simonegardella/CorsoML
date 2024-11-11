@@ -39,53 +39,67 @@ class Neurone():
         self.w = self.w -dw
         self.b -= db
         return errori
+
+class NeuralNetwork():
+    def __init__(self, num_input, epochs=1000):
+        self.epochs = epochs
+        self.neuroni = [Neurone(num_input, Sigmoide, dSigmoide) for _ in range(num_input)]
+        self.neurone_output = Neurone(num_input, Sigmoide, dSigmoide)
+        
+    def FeedForward(self, inputs):
+        outputs = [self.neuroni[i].FF(inputs) for i in range(len(self.neuroni))]
+        
+        output_finale = self.neurone_output.FF(np.array(outputs))
+        
+        return output_finale
     
+    def BackPropagation(self, inputs, vatteso):
+        outputs = [self.neuroni[i].FF(inputs) for i in range(len(self.neuroni))]
+
+        final_output = self.neurone_output.FF(np.array(outputs))
+
+        errore = final_output - vatteso
+        
+        _errori = self.neurone_output.BP(np.array(outputs), errore)
+        
+        for i, neurone in enumerate(self.neuroni):
+            _ = neurone.BP(inputs, _errori[i])
+        
+        return errore **2
     
+    def train(self, dataset):
+        dataset = np.array(dataset)
+        dataset = dataset / np.max(dataset, axis=0)
+        for epoca in range(self.epochs):
+            ErroreEpoca = 0
+            for elemento in dataset:
+                inputs = elemento[:-1]
+                result = elemento[-1]
+                
+                ErroreEpoca += self.BackPropagation(inputs, result) **2
+            
+            ErroreEpoca = math.sqrt(ErroreEpoca/len(dataset))
+            print(f"Epoca {epoca}, Errore: {ErroreEpoca}")
+        
+        return ErroreEpoca
+            
     
-Dataset = [[4,20,0],[5,24,0],[18,70,1],[20,80,1]] # Questo è il Dataset che è rappresentato come una lista di liste
+        
+DatasetCani = [[4,20,0],[5,24,0],[18,70,1],[20,80,1]] # Questo è il Dataset che è rappresentato come una lista di liste
+DatasetGatti = [[4,20,1],[5,24,1],[18,70,0],[20,80,0]] # Questo è il Dataset che è rappresentato come una lista di liste
 # La prima lista contiene le triple di dati che a loro volta solo una lista contenente il Peso, l'altezza e il risultato
 # Il risultato è 0 nel caso di un gatto, 1 nel caso di un cane
 
+rete_neurale_cani = NeuralNetwork(2, 1000)
+rete_neurale_gatti = NeuralNetwork(2, 1000)
 
-massimoPeso = 20    # Massimo valore della prima caratteristica (Peso in Kg)
-massimaAltezza = 80 # Massimo valore della seconda caratteristica  (Altezza in cm)
-
-
-N1 = Neurone(2,Sigmoide,dSigmoide)
-N2 = Neurone(2,Sigmoide,dSigmoide)
-N3 = Neurone(2,Sigmoide,dSigmoide)
-
-
-def FeedForward (inputs):
-    Output1 = N1.FF (inputs)
-    Output2 = N2.FF (inputs)
-    output = N3.FF (np.array ([Output1,Output2]))
-    return output
-
-def BackPropagation (inputs, vatteso):
-    Output1 = N1.FF (inputs)
-    Output2 = N2.FF (inputs)
-    output = N3.FF (np.array ([Output1,Output2]))
-    errore = output- vatteso
-    _errori = N3.BP (np.array ([Output1,Output2]), errore)
+rete_neurale_cani.train(DatasetCani)
+rete_neurale_gatti.train(DatasetGatti)
     
-    _ = N1.BP (inputs,_errori[0])
-    _ = N2.BP (inputs,_errori[1])
+while True: # Creiamo un ciclo infinito: ANCHE SE NON SI FA MAI!
+    peso = float (input ("Dammi il peso dell'animale: ")) / 20
+    altezza = float (input ("Dammi l'altezza dell'animale: ")) / 80
+    risultato_cane = rete_neurale_cani.FeedForward(np.array([peso, altezza]))
+    risultato_gatto = rete_neurale_gatti.FeedForward(np.array([peso, altezza]))
     
-    return errore **2
-    
-
-
-
-
-for epoca in range (50):  #Scorro il range (un insieme di valori da 0 a 4999) e li assegno alla variabile epoca
-    ErroreEpoca = 0 # Azzero per l'epoca in corso la somma dell'errore quatratico
-    for elemento in Dataset: 
-        peso = elemento[0] / massimoPeso # Normalizziamo rispetto al peso
-        altezza = elemento[1] /massimaAltezza # Normalizziamo rispetto all'altezza
-        vatteso = elemento[2]        
-        inputs = np.array ([altezza,peso])
-        ErroreEpoca += BackPropagation(inputs,vatteso) **2
-    ErroreEpoca = math.sqrt(ErroreEpoca/len (Dataset)) # Calcolo l'errore medio divendo la somma precedente per il numero di valori e applicando la radice quadrata.
-    print (epoca, ErroreEpoca) # Per ogni epoca stampo l'errore
-
+    print(risultato_cane, risultato_gatto)
