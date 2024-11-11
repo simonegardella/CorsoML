@@ -16,6 +16,7 @@ class Neurone():
         self.b = random.random()
         self.fa = fa
         self.dfa = dfa
+        self.lr = 0.1
         
     def FN (self, inputs):
         return sum (inputs*self.w)+ self.b
@@ -28,8 +29,8 @@ class Neurone():
         # errore = (inputs- Vatt) ** 2
         
         # Calcoliamo le derivate di ciascun ramo del neurone e rispetto al suo bias
-        dw = 2*errore*self.dfa(fn)* inputs
-        db = 2*errore*self.dfa(fn)
+        dw = 2*errore*self.dfa(fn)* inputs * self.lr
+        db = 2*errore*self.dfa(fn) * self.lr
         
         # Calcoliamo la parte di derivata da passare ai neuroni retrostanti
         errori = 2 * errore * self.dfa(fn) * self.w
