@@ -9,17 +9,16 @@ Corso di Machine Learning:
 
 Se si utilizza Anaconda:
 
- - Si crea il conda environment con il comando -> conda create -n <nomedellenvironment> python=3.12
- - Si attiva l'ambiente con -> conda activate <nomedellenvironment>
+ - Si crea il conda environment con il comando -> conda create -n *nomedellenvironment* python=3.12
+ - Si attiva l'ambiente con -> conda activate *nomedellenvironment*
 
-----
+    +----------------------------------------------------------------+
+    | Librerie da Installare:                                        |
+    |                                                                |
+    | matplotlib -> pip3 install matplotlib                          |
+    | numpy -> pip3 install numpy                                    |
+    +----------------------------------------------------------------+
 
-    Librerie da Installare:
-
-    matplotlib -> pip3 install matplotlib
-    numpy -> pip3 install numpy
-
-----
 Se si utilizza Anaconda:
 
  - Per disattivare l'environment -> conda deactivate
