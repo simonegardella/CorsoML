@@ -21,10 +21,10 @@ class Neurone():
     def FN (self, inputs):
         return sum (inputs*self.w)+ self.b
         
-    def FF (self, inputs):
+    def FF (self, inputs): # Feed Forward
         return self.fa (self.FN(inputs))
     
-    def BP (self, inputs, errore):
+    def BP (self, inputs, errore): # Back Propagation
         fn = self.FN(inputs)
         # errore = (inputs- Vatt) ** 2
         
