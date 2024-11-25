@@ -30,3 +30,8 @@ Datasets -> Contiene i datasets usati nel corso
  - IPromessiSposti.txt -> testo de "I Promessi Sposi"
  - iris.csv -> elenco delle IRIS suddivise per larghezza e lunghezza del sepalo e del petalo
  - HandwrittenDigits -> Collezione di immagini di cifre scritte a mano 	
+
+
+ Altre risorse:
+
+ - Link al playground di Tensorflow : https://playground.tensorflow.org
