@@ -11,11 +11,17 @@ class Dataset ():
         
     def Populate (self, numeropunti):
         data = []
-        for x in range (numeropunti):
-            temp = random.randint(0,self.numerooutput-1) 
-            resultset = [1 if t==temp else 0 for t in range(self.numerooutput)]
+        trim = 0.1/self.numerooutput
+        
+        for i in range (numeropunti):
+            x = random.random()*4 # così rimane nel campo dei float
+            y = random.random()*4
             
-            data.append ([random.random ()*4, random.random()*4, *resultset] )
+            lraggio = ((x-2)**2+(y-2)**2)**.5
+            for k in range (self.numerooutput):
+                if (2/(self.numerooutput)+trim)* k < lraggio <= (2/(self.numerooutput)-trim)* (k+1):
+                    resultset = [1 if t==k else 0 for t in range(self.numerooutput)]
+                    data.append ([x,y, *resultset] )
         self.data = np.array(data)
         
     def Dataset (self):

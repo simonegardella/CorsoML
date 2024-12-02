@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import math
 
 class Dataset ():
     def __init__ (self, numerooutput, numeroelementi = 0):
@@ -11,11 +12,21 @@ class Dataset ():
         
     def Populate (self, numeropunti):
         data = []
-        for x in range (numeropunti):
-            temp = random.randint(0,self.numerooutput-1) 
-            resultset = [1 if t==temp else 0 for t in range(self.numerooutput)]
-            
-            data.append ([random.random ()*4, random.random()*4, *resultset] )
+        trim = 0.0
+        puntiAngolo = int(numeropunti / 540)
+        
+        for angolo in range (540):
+            trim += .1/540
+            for classe in range (self.numerooutput):
+                angolorad = (angolo+(360/self.numerooutput*classe))/180*math.pi
+                for i in range (puntiAngolo):
+                    raggiominimo = angolo/540*2-trim/2
+                    raggiomassimo = angolo/540*2+trim/2
+                    raggio = raggiominimo+random.random()* (raggiomassimo-raggiominimo)
+                    x= raggio *math.cos(angolorad) + 2
+                    y = raggio*math.sin(angolorad) + 2
+                    resultset = [1 if t==classe else 0 for t in range(self.numerooutput)]
+                    data.append ([x,y, *resultset] )
         self.data = np.array(data)
         
     def Dataset (self):
