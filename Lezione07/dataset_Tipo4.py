@@ -29,6 +29,15 @@ class Dataset ():
                     data.append ([x,y, *resultset] )
         self.data = np.array(data)
         
+    def Shuffle (self):
+        np.random.shuffle (self.data)
+    def Normalizzazione (self):
+        self.maxes = np.max(self.data,axis=0)
+        self.data = self.data / self.maxes
+        
+    def Denormalizza (self):
+        self.data = self.data * self.maxes
+        
     def Dataset (self):
         return self.data[:,:2]
     def Resultset (self):

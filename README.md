@@ -7,6 +7,7 @@ Corso di Machine Learning:
 - Lezione05 - Creazione di una rete con layer Hidden, cpn un numero di perceptroni, un numero di Neuroni nel layer Hidden e un numero di Classificatori variabili
 - Lezione06 - Creazione di Classi di Dataset per comprendere come configurare la rete in funzione del dataset (un dataset con dati linearmente separabile [Tipo1], un dataset con dati a scacchiera [Tipo2])
 - Lezione07 - ...prosecuzione della Lezione06 con la creazione di datasdet con dati concentrici [Tipo3] e un dataset con dati a spirale [Tipo4]
+- Lezione08 - Realizzazione di una rete con Tensorflow in grado di processare tutti i dataset precedentemente creati e quello delle iris
 
 
 Se si utilizza Anaconda:
@@ -38,3 +39,7 @@ Datasets -> Contiene i datasets usati nel corso
  Altre risorse:
 
  - Link al playground di Tensorflow : https://playground.tensorflow.org
+ - Link a Tensorflow : https://www.tensorflow.org/?hl=it
+ - Link a Keras : https://keras.io
+ - Layers di Keras : https://keras.io/api/layers/
+ - Funzioni di attivazione di Keras: https://keras.io/api/layers/activations/
