@@ -8,6 +8,7 @@ Corso di Machine Learning:
 - Lezione06 - Creazione di Classi di Dataset per comprendere come configurare la rete in funzione del dataset (un dataset con dati linearmente separabile [Tipo1], un dataset con dati a scacchiera [Tipo2])
 - Lezione07 - ...prosecuzione della Lezione06 con la creazione di datasdet con dati concentrici [Tipo3] e un dataset con dati a spirale [Tipo4]
 - Lezione08 - Realizzazione di una rete con Tensorflow in grado di processare tutti i dataset precedentemente creati e quello delle iris
+- Lezione09 - Algoritmo di apprendimento per rinforzo (QLearn) e Rete Ricorrente sul testo de "I Promessi Sposi"
 
 
 Se si utilizza Anaconda:
